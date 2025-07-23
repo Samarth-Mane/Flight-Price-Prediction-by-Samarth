@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction</title>
+    <link rel="shortcut icon" href="static/images/logo1.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+        }
+
+        header {
+            background-color: #0288d1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header img{
+            border-radius: 12px;
+            margin-right: 1550px;
+            height: 66px;
+            width: 130px;
+            position: relative;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #0288d1;
+            border-bottom: 2px solid #c61933;
+            padding-bottom: 5px;
+        }
+
+        .team {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            text-align: center;
+            margin: 10px;
+            flex: 1 1 calc(30% - 20px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        .team-member h3 {
+            margin: 10px 0;
+        }
+
+        .team-member p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #0288d1;
+            color: white;
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <form action="\predict" method="post">
+        <header>
+            <img src="{{ url_for('static', filename='images/logo1.jpg') }}" alt="Logo" class="image"><h1>About</h1>
+        </header>
+
+        <main>
+            <div class="section">
+                <h2>About the Project</h2>
+                <p>The Flight Price Prediction project is a data science initiative aimed at predicting the prices of airline tickets based on various features such as date of travel, source, destination, and airline.<br> Using advanced Data Science techniques, this project enables users to make informed decisions when booking flights by providing an accurate estimate of ticket prices.</p>
+            </div>
+
+            <div class="section">
+                <h2>Team Members</h2>
+                <div class="team">
+                    <div class="team-member">
+                        <h3>Samarth</h3>
+                        <p>USN: 3PD22IS038</p>
+                    </div>
+
+                    <div class="team-member">
+                        <h3>GuruPrasad</h3>
+                        <p>USN: 3PD22IS016</p>
+                    </div>
+
+                    <div class="team-member">
+                        <h3>Abhishek</h3>
+                        <p>USN: 3PD22IS002</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="team-member">
+                    <h3>Guided By</h3>
+                    <h3>Mukund H</h3>
+                    <h3>Prof ISE Dept</h3>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Exploratory data analysis for meaningful insights.</li>
+                    <li>Accurate price predictions using machine learning models.</li>
+                    <li>Accurate price predictions using the old Data Available.</li>
+                    <li>Interactive user interface for seamless user experience.</li>
+                </ul>
+            </div>
+        </main>
+    </form>
+    <form><a href="/predict" style="color: white;">Go to Home Page</a></form>
+    <footer>
+        <p>&copy; 2024 Flight Price Prediction Team</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction</title>
+    <link rel="shortcut icon" href="static/images/logo1.jpg" type="image/x-icon">
+
+
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <!-- css -->
+    <style>
+        header {
+            background-color: #0288d1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h3 {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 2.5rem;
+        }
+        header img{
+            margin-right: 1550px;
+            border-radius: 12px;
+            height: 66px;
+            width: 130px;
+            position: relative;
+            
+        }
+        body {
+            background-image: url('https://wallpapercave.com/wp/w8nLkaM.jpg');
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+        }
+        
+        
+        .navbar-brand{
+            
+            padding: 20px;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 10px;
+
+        }
+        .navbar {
+            
+            color: white;
+            padding: 20px;
+            text-align: center;
+            
+            
+        }
+        .row{
+            
+            border-radius: 12px;
+        }
+        
+        a {
+            color:crimson;
+        }
+        
+        a:hover {
+            height: 66px;
+            width: 135x;
+            border-radius: 12px;
+            background-color: white;
+            color: #47d909;
+        }
+        body{
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 12px;
+
+        }
+        
+         .light {
+            width: 10px;
+            height: 10px;
+            background: red;
+            border-radius: 50%;
+            bottom: 295px;
+            position: absolute;
+            z-index: 100;
+            left: 20px;
+            animation: light 800ms ease-in-out 0s infinite alternate;
+         }
+         .cloud {
+           position: absolute;
+           top: 650px;
+           right: -500px;
+           opacity: .8;
+            animation: cloud 20s linear 0s infinite reverse;
+           z-index: 99;
+         }
+         @keyframes light {
+           0% {opacity: 0;}
+           100% {opacity: 1;}
+         }
+         @keyframes cloud {
+           from {right:-500px;}
+           to {right: 102%;}
+         }
+        footer{
+            text-align: center;
+            padding: 10px;
+            background: #0288d1;
+            color: white;
+            position: relative;
+        }
+        footer p{
+            margin: 0%;
+            width: 100%;
+        }
+        .but{
+            height: 66px;
+            width: 123x;
+            background:linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 12px;
+            font-size: 18px; /* Font size for text */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }   
+        .ticket{
+            border-radius: 12px;
+        }
+        ticket.a{
+            color: crimson;
+        }
+            
+        .fare-summary {
+            justify-content: center;
+            align-items: center;
+            margin-left: 400px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: left;
+        }
+        .fare-summary h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .fare-summary .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .fare-summary .row.total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .fare-summary .green {
+            color: #28a745;
+        }
+        .fare-summary .red {
+            color: #dc3545;
+        }
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .legend span {
+            display: flex;
+            align-items: center;
+        }
+        .legend div {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .legend .free {
+            background-color: #d4edda;
+        }
+        .legend .economy {
+            background-color: #ffeeba;
+        }
+        .legend .premium {
+            background-color: #c3e6cb;
+        }
+        .legend .unavailable {
+            background-color: #f8d7da;
+        }
+        .seats {
+            display: grid;
+            grid-template-columns: repeat(14, 1fr);
+            gap: 10px;
+        }
+        .seat {
+            width: 40px;
+            height: 40px;
+            background-color: #ffeeba;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .seat.free {
+            background-color: #d4edda;
+        }
+        .seat.premium {
+            background-color: #c3e6cb;
+        }
+        .seat.unavailable {
+            background-color: #f8d7da;
+            cursor: not-allowed;
+        }
+        .seat.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        .row-label {
+            grid-column: span 14;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .details-container {
+            margin-top: 20px;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .details-container h3 {
+            margin-bottom: 10px;
+        }
+        .details-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .details-container ul li {
+            margin-bottom: 5px;
+        }
+        .seat-container, .coupon-container, .fare-summary-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .legend span {
+            display: flex;
+            align-items: center;
+        }
+        .legend div {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .legend .free {
+            background-color: #d4edda;
+        }
+        .legend .economy {
+            background-color: #ffeeba;
+        }
+        .legend .premium {
+            background-color: #c3e6cb;
+        }
+        .legend .unavailable {
+            background-color: #f8d7da;
+        }
+        .seats {
+            display: grid;
+            grid-template-columns: repeat(14, 1fr);
+            gap: 10px;
+        }
+        .seat {
+            width: 40px;
+            height: 40px;
+            background-color: #ffeeba;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .seat.free {
+            background-color: #d4edda;
+        }
+        .seat.premium {
+            background-color: #c3e6cb;
+        }
+        .seat.unavailable {
+            background-color: #f8d7da;
+            cursor: not-allowed;
+        }
+        .seat.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        .coupon-container {
+            margin-top: 20px;
+        }
+        .coupon-container button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .coupon-container button:hover {
+            background-color: #0056b3;
+        }
+        .fare-summary-container {
+            margin-top: 20px;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .fare-summary-container h3 {
+            margin-bottom: 10px;
+        }
+        .fare-summary-container p {
+            margin: 5px 0;
+        }
+        .container-det {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section-det {
+            margin-bottom: 20px;
+        }
+
+         </style>
+        
+
+</head>
+
+<body>
+    
+
+    <!-- As a heading -->
+    <header>
+        <img src="{{ url_for('static', filename='images/logo1.jpg') }}" alt="Logo" class="image"><h3><b>Flight Price Prediction</b></h3>
+    </header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="but"><a class="navbar-brand" href="/">Flight Price</a></button>
+                <button class="but"><a class="navbar-brand" href="/about">About</a></button>
+            </div>
+        </div>
+    </nav>
+    
+
+
+    <br><br><br>
+    
+
+    <div class="container">
+
+
+
+        <form action="\predict" method="post">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Arrival Date</h5>
+                            <!-- Arrival -->
+                            <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" required="required">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Departure Date</h5>
+                            <!-- Departure -->
+                            <input type="datetime-local" name="Dep_Time" id="Dep_Time" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Source -->
+                            <h5 class="card-title">Source</h5>
+                            <select name="Source" id="Source" required="required">
+                                <option value="Delhi">Delhi</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Banglore">Banglore</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Destination</h5>
+                            <!-- Destination -->
+                            <select name="Destination" id="Destination" required="required">
+                                <option value="Cochin">Cochin</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="New Delhi">New Delhi</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Kolkata">Kolkata</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br>
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Stopage</h5>
+                            <!-- Total Stops -->
+                            <select name="stops" required="required">
+                                <option value="0">Non-Stop</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Which Airline you want to travel?</h5>
+                            <!-- Airline -->
+                            <select name="airline" id="airline" required="required">
+                                <option value="Jet Airways">Jet Airways</option>
+                                <option value="IndiGo">IndiGo</option>
+                                <option value="Air India">Air India</option>
+                                <option value="Multiple carriers">Multiple carriers</option>
+                                <option value="SpiceJet">SpiceJet</option>
+                                <option value="Vistara">Vistara</option>
+                                <option value="Air Asia">Air Asia</option>
+                                <option value="GoAir">GoAir</option>
+                                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy
+                                </option>
+                                <option value="Jet Airways Business">Jet Airways Business</option>
+                                <option value="Vistara Premium economy">Vistara Premium economy</option>
+                                <option value="Trujet">Trujet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br>
+            <br>
+            <!-- Submit -->
+            <div class="submit"><input type="submit" value="Submit" class="btn btn-secondary">
+        </form>
+        <form action="\about" method="post"></form>
+        <form action="\body" method="post"></form>
+
+
+        <br>
+        <br>
+        <h3>The Total Amount Will be:{{prediction_text}}</h3>
+        <br>
+        <div class="cloud cloud1">
+            <div class="light"></div>
+          <img  src="https://images.vexels.com/media/users/3/145795/isolated/preview/05cd33059a006bf49006097af4ccba98-plane-in-flight-by-vexels.png" /></div></div>
+          <div class="ticket"><p>Click the below link to Book the Ticket</p><button><a href="https://www.ixigo.com/">Book Ticket</a></button></div>
+        <br>
+        <div class="coupon-container">
+            <h3>Available Coupons</h3>
+            <button data-discount="200">200 off on Regular Journey: ₹200 OFF</button>
+            <button data-discount="300">300 off on first food: ₹300 OFF</button>
+            <button data-discount="500">500 off on First Booking: ₹500 OFF</button>
+        </div>
+    
+        <div class="fare-summary-container">
+            <h3>Fare Summary</h3>
+            <p>Base Fare: ₹<span id="base-fare">{{prediction_text}}</span></p>
+            <p>Discount: ₹<span id="discount">0</span></p>
+            <h3>The Final Price is ₹<span id="total-fare">1000</span></h3>
+            <button class="buttion"><a href="/body.html">Proceed Payment & Future Scope</a></button>
+        </div>
+        
+        <script>
+            const baseFare ={{prediction_text}};
+            const discountElement = document.getElementById('discount');
+            const totalFareElement = document.getElementById('total-fare');
+            const couponButtons = document.querySelectorAll('.coupon-container button');
+    
+            couponButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const discount = parseInt(button.getAttribute('data-discount'));
+                    discountElement.textContent = discount;
+                    totalFareElement.textContent = baseFare - discount;
+                });
+            });
+            </script>                
+
+            <div class="final"></div>
+        <footer>
+           <p> &copy; Flight Price Prediction | Mini Project - By Samarth,GuruPrasad,Abhishek</p>
+        </footer>
+    </div>
+
+
+
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
