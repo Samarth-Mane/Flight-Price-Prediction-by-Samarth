@@ -3,9 +3,25 @@ from flask_cors import cross_origin
 import sklearn
 import pickle
 import pandas as pd
+from sklearn.metrics import r2_score
+import matplotlib.pyplot as plt
+import os
+import joblib
+import matplotlib
+matplotlib.use('Agg')  # Use non-GUI backend for Flask
+
+
+
 
 app = Flask(__name__)
 model = pickle.load(open("flight_rf.pkl", "rb"))
+
+model = pickle.load(open("flight_rf.pkl", "rb"))
+
+# Load test data
+X_test = joblib.load("X_test.pkl")
+y_test = joblib.load("y_test.pkl")
+
 
 
 
@@ -364,7 +380,30 @@ def predict():
 
         output=round(prediction[0],2)
 
-        return render_template('home.html',prediction_text="{}".format(float(output)))
+                # Predict for test set
+        y_pred = model.predict(X_test)
+
+        # R2 score
+        r2 = r2_score(y_test, y_pred)
+        r2_score_text = f"Model R² Score: {r2:.4f}"
+
+        # Plot
+        plt.figure(figsize=(8, 6))
+        plt.scatter(y_test, y_pred, color='skyblue', edgecolors='k')
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
+        plt.xlabel("Actual Price")
+        plt.ylabel("Predicted Price")
+        plt.title("Actual vs Predicted Flight Prices")
+        plt.grid(True)
+
+        # Save image
+        image_path = os.path.join("static", "prediction_plot.png")
+        plt.savefig(image_path)
+        plt.close()
+
+
+        return render_template('home.html',prediction_text="{}".format(float(output)),r2_score_text=r2_score_text,
+    image_path=image_path)
         output = int(float(output))  # Handles decimal strings and converts to integer
 
 
@@ -379,8 +418,35 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/score")
+@cross_origin()
+def model_score():
+    # Load test data
+    X_test = joblib.load("X_test.pkl")
+    y_test = joblib.load("y_test.pkl")
+
+    # Predict using loaded model
+    y_pred = model.predict(X_test)
+
+    # Calculate R2 Score
+    r2 = r2_score(y_test, y_pred)
+
+    # Save plot
+    plt.figure(figsize=(8, 6))
+    plt.scatter(y_test, y_pred, alpha=0.5, edgecolor='k')
+    plt.xlabel("Actual Price")
+    plt.ylabel("Predicted Price")
+    plt.title(f"Actual vs Predicted Price\nR² Score: {r2:.4f}")
+    plt.grid(True)
+
+    if not os.path.exists("static"):
+        os.makedirs("static")
+    plot_path = os.path.join("static", "r2_plot.png")
+    plt.savefig(plot_path)
+    plt.close()
+
+    return render_template("score.html", r2_score_val=round(r2, 4), plot_url=plot_path)
 
 
 if __name__ == "__main__":
-
     app.run(debug=True)
