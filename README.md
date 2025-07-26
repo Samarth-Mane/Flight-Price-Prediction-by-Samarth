@@ -33,6 +33,19 @@ It demonstrates the entire machine learning pipeline from data preprocessing and
 - HTML/CSS (for front-end)
 
 ---
+**✈️ Real-Time Price vs Predicted Price**
+
+** To evaluate the real-world effectiveness of the model, a comparison was made between the predicted price and actual real-time flight fares from New Delhi to Kochi on 27th July.
+
+🔹 Predicted Price by Model: ₹7,073.77
+
+🔹 Actual Market Price (Air India): ₹6,735 – ₹7,840
+
+✅ The predicted fare of ₹7,073.77 closely aligns with the actual listed prices on popular travel platforms, showcasing the model's strong predictive capability and practical usefulness.
+With an R² score of 0.7937 (~79%), the model demonstrates a high level of accuracy in estimating flight prices, making it a valuable tool for price forecasting and travel cost planning. **
+
+---
+---
 
 📊 Model Prediction Performance 
 
