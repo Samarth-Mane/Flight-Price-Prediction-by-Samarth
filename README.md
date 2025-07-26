@@ -34,14 +34,24 @@ It demonstrates the entire machine learning pipeline from data preprocessing and
 
 ---
 
+📊 Model Prediction Performance 
+
+The model achieved an R² score of 0.7939 (≈79%), meaning it can accurately explain 79% of the variation in flight prices based on the input features.
+This indicates a highly effective model that can provide reliable and practical predictions for real-world flight pricing scenarios.
+
+---
+
+---
 **Website Landing Page**
 
-<img width="1913" height="1018" alt="image" src="https://github.com/user-attachments/assets/9883aa37-c000-479c-9910-8bdd6323389a" />
-<img width="1884" height="873" alt="image" src="https://github.com/user-attachments/assets/09cae634-8654-445f-9c4a-a012a78065d6" />
+<img width="1884" height="1023" alt="image" src="https://github.com/user-attachments/assets/83c13fb0-c4d4-48ba-a78c-8881146a17bc" />
+<img width="1884" height="1022" alt="image" src="https://github.com/user-attachments/assets/d0721c2a-c86d-47f1-9dac-068c74ab413d" />
+<img width="1888" height="539" alt="image" src="https://github.com/user-attachments/assets/a5376dd1-b1c0-432c-b02c-fa7f716db139" />
+
 
 About section - 
 <img width="1882" height="1017" alt="image" src="https://github.com/user-attachments/assets/de5189b5-2c00-4223-b969-5370e71ce3f4" />
-
+---
 
 
 
