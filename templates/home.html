@@ -14,17 +14,66 @@
 
     <!-- css -->
     <style>
-        header {
-            background-color: #0288d1;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+        /* Style for the logo image */
+.image {
+    height: 50px;
+    margin-left: 20px;
+}
+
+/* Button styling */
+.but {
+    background-color: #337ab7; /* Bootstrap-like primary button color */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.but:hover {
+    background-color: #286090;
+}
+
+/* Link inside buttons */
+.navbar-brand {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+/* Optional: remove link default underline and fix alignment */
+.navbar-brand:hover {
+    color: #e6e6e6;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff; /* Dark navbar background */
+    padding: 10px 20px;
+    color: rgb(0, 0, 0);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+
+
+
+        
 
         header h3 {
             margin: 0;
             font-family: Arial, sans-serif;
             font-size: 2.5rem;
+            margin-right: 50px;
         }
         header img{
             margin-right: 1550px;
@@ -42,6 +91,8 @@
             padding: 0;
             background: linear-gradient(to right, #4facfe, #00f2fe);
             color: #333;
+            padding-top: 70px;
+
         }
         
         
@@ -60,6 +111,76 @@
             
             
         }
+        /* Row layout styling */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+/* Column layout */
+.col-sm-6 {
+    flex: 0 0 48%;
+}
+
+/* Card styling */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Card body padding */
+.card-body {
+    padding: 20px;
+}
+
+/* Card title */
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Input field styling */
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="datetime-local"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+/* Optional spacing tweaks */
+br {
+    display: none; /* Remove <br> spacing since Flexbox handles it */
+}
+
+/* Responsive tweak (optional) */
+@media screen and (max-width: 768px) {
+    .col-sm-6 {
+        flex: 0 0 100%;
+    }
+}
+
         .row{
             
             border-radius: 12px;
@@ -120,15 +241,7 @@
             margin: 0%;
             width: 100%;
         }
-        .but{
-            height: 66px;
-            width: 123x;
-            background:linear-gradient(to right, #4facfe, #00f2fe);
-            border-radius: 12px;
-            font-size: 18px; /* Font size for text */
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }   
+        
         .ticket{
             border-radius: 12px;
         }
@@ -380,10 +493,12 @@
 }
 
 .custom-btn:hover {
-  background: linear-gradient(to right, #0072ff, #00c6ff);
+  background: #e85d00;
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0, 114, 255, 0.4);
 }
+  .custom-btn:hover {
+  }
 
          </style>
         
@@ -394,17 +509,17 @@
     
 
     <!-- As a heading -->
-    <header>
-        <img src="{{ url_for('static', filename='images/logo1.jpg') }}" alt="Logo" class="image"><h3><b>Flight Price Prediction</b></h3>
-    </header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button class="but"><a class="navbar-brand" href="/">Flight Price</a></button>
-                <button class="but"><a class="navbar-brand" href="/about">About</a></button>
-            </div>
-        </div>
-    </nav>
+   <header style="display: flex; align-items: center; justify-content: space-between; padding: 10px;">
+    <div style="display: flex; align-items: center;">
+        <img src="{{ url_for('static', filename='images/logo1.jpg') }}" alt="Logo" class="image" style="height: 50px; margin-right: 10px;">
+        <h3 style="margin: 0; margin-left: 50px;"><b>Flight Price Prediction</b></h3>
+    </div>
+    <div>
+        <a class="navbar-brand" href="/" style="margin-right: 15px; text-decoration: none;"><button class="but">Flight Price</button></a>
+        <a class="navbar-brand" href="/about" style="text-decoration: none;"><button class="but">About</button></a>
+    </div>
+</header>
+
     
 
 
