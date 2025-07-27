@@ -57,7 +57,7 @@ This indicates a highly effective model that can provide reliable and practical 
 ---
 **Website Landing Page**
 
-<img width="1884" height="1023" alt="image" src="https://github.com/user-attachments/assets/83c13fb0-c4d4-48ba-a78c-8881146a17bc" />
+<img width="1895" height="692" alt="image" src="https://github.com/user-attachments/assets/bba7aa1b-2643-418d-a4d0-a56c3eee5c40" />
 <img width="1884" height="1022" alt="image" src="https://github.com/user-attachments/assets/d0721c2a-c86d-47f1-9dac-068c74ab413d" />
 <img width="1888" height="539" alt="image" src="https://github.com/user-attachments/assets/a5376dd1-b1c0-432c-b02c-fa7f716db139" />
 
